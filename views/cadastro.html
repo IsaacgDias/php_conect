@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../assets/style.css">
     <title>Cadastrar-se</title>
 </head>
 <body>
     <div class="container">
         <h1>Cadastrar-se</h1>
-        <form action="" class="formConect">
+        <form action="../controller/UserController.php" method="post" name="cad" class="formConect">
             <input type="text" id="nome" name="nome" placeholder="Nome">
             <input type="text" id="telefone" name="telefone" placeholder="Telefone">
-            <input type="text" id="email" name="email" placeholder="Email">
+            <input type="text" id="mail" name="mail" placeholder="Email">
             <input type="password" name="senha" id="senha" placeholder="Password">
             <input type="password" name="senha1" id="senha1" placeholder="Password novamente">
-            <button type="submit">Confirmar</button>
+            <button type="submit" id="cadastrar" name="cadastrar" value="cadastrar">Confirmar</button>
         </br></br>
         <span><a href="index.html">Possui uma conta?</a></span>
         </form>
