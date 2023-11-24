@@ -58,6 +58,18 @@ form > button {
     font-family:'Times New Roman', Times, serif;
 }
 
+span {
+    cursor: pointer;
+    font-size: 15px;
+}
+span:hover {
+    font-size: 15.5px;
+}
+span > a {
+    text-decoration: none;
+    color: rgb(8, 50, 128);
+}
+
 @media (max-width: 390px) {
    .container {
     width: 300px;
