@@ -39,7 +39,8 @@ if(isset($_POST['cadastrar'])){
   if($userdao->login($usuario)) {
 
      echo "<script>        
-          alert('Sucesso!');
+            alert('Sucesso!');
+            location.href = '../views/home.html';
            </script>";
 
   } else {
