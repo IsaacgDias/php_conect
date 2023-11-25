@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 class UserDao {
 
@@ -17,6 +18,32 @@ public function criar(Usuario $usuario) {
 
     } catch (PDOException $e) {
         echo "Erro ao Inserir usuario <br>" . $e->getMessage() . '<br>';
+    }
+}
+
+public function login(Usuario $usuario) {
+    try {
+        $sql = "SELECT * FROM usuario WHERE email = :email";
+        $stmt = Conexao::getConexao()->prepare($sql);
+        $stmt->bindValue(":email", $usuario->getEmail(), PDO::PARAM_STR);
+        $stmt->execute();
+        $user_linha = $stmt->fetch(PDO::FETCH_ASSOC);
+                
+        if($stmt->rowCount() == 1) {
+
+            if(password_verify($usuario->getSenha(), $user_linha['senha'])) {
+
+                $_SESSION['user_session'] = $user_linha['id_usuario'];
+                return true;
+                
+            } else {
+                return false;
+            }
+        }
+    }
+    catch(PDOException $e) {
+
+        echo "Erro ao tentar realizar o login do usuario" . $e->getMessage();
     }
 }
 

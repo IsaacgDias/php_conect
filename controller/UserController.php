@@ -26,6 +26,26 @@ if(isset($_POST['cadastrar'])){
             alert('Usuário Cadastrado com Sucesso!!');
             location.href = '../';
           </script>";
-    }
 
-}
+    } 
+
+} else if(isset($_POST['login'])) {
+
+  $usuario->setEmail(strip_tags($dados['mail']));
+  $usuario->setSenha(strip_tags($dados['senha'])); 
+
+    $userdao->login($usuario);
+
+  if($userdao->login($usuario)) {
+
+     echo "<script>        
+          alert('Sucesso!');
+           </script>";
+
+  } else {
+        echo "<script>
+                alert('Acesso inválido! login ou senha incorretos!');
+            </script>";
+  }	
+
+} 
