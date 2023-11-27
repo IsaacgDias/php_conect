@@ -2,7 +2,7 @@
 session_start();
 
 class UserDao {
-
+// Cadastra o usuário
 public function criar(Usuario $usuario) {
     try {
 
@@ -20,7 +20,7 @@ public function criar(Usuario $usuario) {
         echo "Erro ao Inserir usuario <br>" . $e->getMessage() . '<br>';
     }
 }
-
+// Login
 public function login(Usuario $usuario) {
     try {
         $sql = "SELECT * FROM usuario WHERE email = :email";
@@ -29,22 +29,35 @@ public function login(Usuario $usuario) {
         $stmt->execute();
         $user_linha = $stmt->fetch(PDO::FETCH_ASSOC);
                 
-        if($stmt->rowCount() == 1) {
-
-            if(password_verify($usuario->getSenha(), $user_linha['senha'])) {
-
-                $_SESSION['user_session'] = $user_linha['id_usuario'];
-                return true;
-                
-            } else {
-                return false;
+        if ($stmt->rowCount() == 1) {
+            if (password_verify($usuario->getSenha(), $user_linha['senha'])) {
+                // Retorna os detalhes do usuário quando o login for bem-sucedido
+                return $user_linha;
             }
-        }
+        }   
+        
     }
     catch(PDOException $e) {
 
         echo "Erro ao tentar realizar o login do usuario" . $e->getMessage();
     }
+}
+
+public function sair() {
+    // Inicia a sessão se ainda não tiver sido iniciada
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    // Unset das variáveis de sessão
+    $_SESSION = array();
+
+    // Finaliza a sessão
+    session_destroy();
+
+    // Redireciona para a página de login ou outra página desejada após o logout
+    header("Location: ../views/index.html");
+    exit();
 }
 
 }

@@ -34,19 +34,23 @@ if(isset($_POST['cadastrar'])){
   $usuario->setEmail(strip_tags($dados['mail']));
   $usuario->setSenha(strip_tags($dados['senha'])); 
 
-    $userdao->login($usuario);
+     // Verifica o login e armazena os detalhes do usuário na sessão se for bem-sucedido
+     $userDetails = $userdao->login($usuario);
 
-  if($userdao->login($usuario)) {
-
-     echo "<script>        
-            alert('Sucesso!');
-            location.href = '../views/home.html';
-           </script>";
-
+     if ($userDetails) {
+      $_SESSION['user_name'] = $userDetails['nome'];
+      $_SESSION['user_phone'] = $userDetails['telefone']; 
+      $_SESSION['user_email'] = $userDetails['email'];
+      header("Location: ../views/home.php");
+      exit();
   } else {
-        echo "<script>
-                alert('Acesso inválido! login ou senha incorretos!');
-            </script>";
-  }	
+      echo "<script>
+          alert('Acesso inválido! login ou senha incorretos!');
+      </script>";
+  }
 
+
+} else if (isset($_GET['sair'])) {
+  
+    $userdao->sair();
 } 
