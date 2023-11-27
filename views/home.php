@@ -131,7 +131,7 @@ form {
             </div>
         </div>
         
-        <form action="">
+        <form action="editar.php">
             <button class="btn-edit">Editar</button>
         </form>
         <form action="../controller/UserController.php" method="post">

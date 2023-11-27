@@ -29,7 +29,28 @@ if(isset($_POST['cadastrar'])){
 
     } 
 
-}else if(isset($_POST['excluir'])) { 
+} if (isset($_POST['editar'])) {
+    $usuario = new Usuario();
+    $usuario->setID($_POST['id_usuario']);
+    $usuario->setNome($_POST['nome']);
+    $usuario->setTelefone($_POST['telefone']);
+    $usuario->setEmail($_POST['email']);
+    $usuario->setSenha(password_hash($_POST['senha'], PASSWORD_DEFAULT));
+
+    if ($userdao->editar($usuario)) {
+        // Atualiza a sessão com os novos detalhes do usuário
+        $_SESSION['user_name'] = $usuario->getNome();
+        $_SESSION['user_phone'] = $usuario->getTelefone();
+        $_SESSION['user_email'] = $usuario->getEmail();
+        
+        // Redireciona para a página home.php
+        header("Location: ../views/home.php");
+        exit();
+    } else {
+        echo "<script>alert('Falha ao editar o usuário!');</script>";
+    }
+
+} else if(isset($_POST['excluir'])) { 
 
   $usuario = new Usuario();
     $usuario->setID($_POST['id_del']);

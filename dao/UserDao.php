@@ -21,6 +21,24 @@ public function criar(Usuario $usuario) {
     }
 }
 
+// Editar usuário
+public function editar(Usuario $usuario) {
+    try {
+        $sql = "UPDATE usuario SET nome = :nome, telefone = :telefone, email = :email, senha = :senha WHERE id_usuario = :id";
+        $stmt = Conexao::getConexao()->prepare($sql);
+        $stmt->bindValue(":nome", $usuario->getNome(), PDO::PARAM_STR);
+        $stmt->bindValue(":telefone", $usuario->getTelefone(), PDO::PARAM_STR);
+        $stmt->bindValue(":email", $usuario->getEmail(), PDO::PARAM_STR);
+        $stmt->bindValue(":senha", $usuario->getSenha(), PDO::PARAM_STR);
+        $stmt->bindValue(":id", $usuario->getID(), PDO::PARAM_INT);
+        
+        return $stmt->execute();
+    } catch (PDOException $e) {
+        echo "Erro ao editar usuário: " . $e->getMessage();
+        return false;
+    }
+}
+
 //Deletar usuário
 public function excluir(Usuario $usuario) {
     try {
