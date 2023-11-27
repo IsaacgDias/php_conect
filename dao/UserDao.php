@@ -20,6 +20,21 @@ public function criar(Usuario $usuario) {
         echo "Erro ao Inserir usuario <br>" . $e->getMessage() . '<br>';
     }
 }
+
+//Deletar usuário
+public function excluir(Usuario $usuario) {
+    try {
+
+        $sql = "DELETE FROM usuario WHERE id_usuario = :id";
+        $stmt = Conexao::getConexao()->prepare($sql);
+        $stmt->bindValue(":id", $usuario->getID(), PDO::PARAM_INT);
+        return $stmt->execute();
+
+    } catch (PDOException $e) {
+        echo "Erro ao Excluir usuario" . $e->getMessage();
+    }
+}
+
 // Login
 public function login(Usuario $usuario) {
     try {

@@ -134,15 +134,14 @@ form {
         <form action="">
             <button class="btn-edit">Editar</button>
         </form>
-        <form action="">
-            <button class="btn-exc">Excluir</button>
+        <form action="../controller/UserController.php" method="post">
+            <input type="hidden" id="id_del" name="id_del" value="<?php echo $_SESSION['user_id']; ?>">
+            <button class="btn-exc" type="submit" id="excluir" name="excluir" value="excluir">Excluir</button>
         </form>
         <form action="../controller/UserController.php">
             <button class="btn-sair" type="submit" id="sair" name="sair" value="sair">Sair</button>
         </form>
        
-
-        
     </div>
 </body>
 </html>

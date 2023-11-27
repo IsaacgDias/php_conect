@@ -29,6 +29,23 @@ if(isset($_POST['cadastrar'])){
 
     } 
 
+}else if(isset($_POST['excluir'])) { 
+
+  $usuario = new Usuario();
+    $usuario->setID($_POST['id_del']);
+
+    if ($userdao->excluir($usuario)) {
+        // Redirecionar para a página de destino após a exclusão
+        $usuario->setID($_POST['id_del']);
+
+        if($userdao->excluir($usuario)) {
+    
+        echo "<script>
+                alert('Usuário Deletado com Sucesso!!');
+                location.href = '../views/index.html';
+            </script>";
+        }
+    }
 } else if(isset($_POST['login'])) {
 
   $usuario->setEmail(strip_tags($dados['mail']));
@@ -38,6 +55,7 @@ if(isset($_POST['cadastrar'])){
      $userDetails = $userdao->login($usuario);
 
      if ($userDetails) {
+      $_SESSION['user_id'] = $userDetails['id_usuario'];
       $_SESSION['user_name'] = $userDetails['nome'];
       $_SESSION['user_phone'] = $userDetails['telefone']; 
       $_SESSION['user_email'] = $userDetails['email'];
