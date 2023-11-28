@@ -89,7 +89,7 @@ public function sair() {
     session_destroy();
 
     // Redireciona para a página de login ou outra página desejada após o logout
-    header("Location: ../views/index.html");
+    header("Location: ../index.html");
     exit();
 }
 

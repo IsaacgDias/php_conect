@@ -73,7 +73,10 @@ span > a {
     text-decoration: none;
     color: rgb(8, 50, 128);
 }
-
+a {
+    text-decoration:none;
+    color: black;
+}
 @media (max-width: 390px) {
    .container {
     width: 300px;
@@ -102,9 +105,12 @@ span > a {
             <input type="text" id="nome" name="nome" value="<?php echo $_SESSION['user_name']; ?>" placeholder="Novo Nome" required>
             <input type="text" id="telefone" name="telefone" value="<?php echo $_SESSION['user_phone']; ?>" placeholder="Novo Telefone" required>
             <input type="text" id="email" name="email" value="<?php echo $_SESSION['user_email']; ?>" placeholder="Novo Email" required>
-            <input type="password" id="senha" name="senha" value="<?php echo $_SESSION['user_email']; ?>" placeholder="Nova Senha" required>
+            
             <button type="submit" id="editar" name="editar" value="editar">Salvar</button>
+            </br></br>
+            <a href="../views/home.php">Voltar</a>
         </form>
     </div>
+
 </body>
 </html>

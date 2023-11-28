@@ -134,14 +134,24 @@ form {
         <form action="editar.php">
             <button class="btn-edit">Editar</button>
         </form>
-        <form action="../controller/UserController.php" method="post">
+        <form id="formExcluir" action="../controller/UserController.php" method="post">
             <input type="hidden" id="id_del" name="id_del" value="<?php echo $_SESSION['user_id']; ?>">
-            <button class="btn-exc" type="submit" id="excluir" name="excluir" value="excluir">Excluir</button>
+            <button class="btn-exc" type="submit" id="excluir" name="excluir" value="excluir"  onclick="confirmarExclusao()">Excluir</button>
         </form>
         <form action="../controller/UserController.php">
             <button class="btn-sair" type="submit" id="sair" name="sair" value="sair">Sair</button>
         </form>
        
     </div>
+
+    <script>
+    function confirmarExclusao() {
+        if (confirm('Tem certeza que deseja excluir?')) {
+            document.getElementById('formExcluir').submit();
+        } else {
+            event.preventDefault(); // Impede o envio do formulário caso o usuário cancele
+        }
+    }
+</script>
 </body>
 </html>

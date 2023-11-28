@@ -21,7 +21,7 @@ class Conexao {
             // Garante que os dados sejam armazenados com codificação UFT-8.
             self::$conexao->exec('SET NAMES utf8');
 
-            echo "Conectado com sucesso!!";
+            //echo "Conectado com sucesso!!";
         }
         catch (PDOException $e)
         {

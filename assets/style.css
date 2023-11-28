@@ -41,7 +41,6 @@ input[type="password"]:focus {
     box-shadow: 0 0 5px rgb(134, 187, 189);
 }
 
-
 form {
     text-align: center;
 }
@@ -76,6 +75,7 @@ span > a {
    }
 
    input[type="text"],
+   input[type="email"],
    input[type="password"] {
     width: 200px;
    

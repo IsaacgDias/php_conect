@@ -23,8 +23,8 @@ if(isset($_POST['cadastrar'])){
     if($userdao->criar($usuario)) {
 
     echo "<script>
-            alert('Usuário Cadastrado com Sucesso!!');
-            location.href = '../';
+            alert('Cadastrado com Sucesso!!');
+            location.href = '../index.html';
           </script>";
 
     } 
@@ -35,7 +35,6 @@ if(isset($_POST['cadastrar'])){
     $usuario->setNome($_POST['nome']);
     $usuario->setTelefone($_POST['telefone']);
     $usuario->setEmail($_POST['email']);
-    $usuario->setSenha(password_hash($_POST['senha'], PASSWORD_DEFAULT));
 
     if ($userdao->editar($usuario)) {
         // Atualiza a sessão com os novos detalhes do usuário
@@ -62,8 +61,8 @@ if(isset($_POST['cadastrar'])){
         if($userdao->excluir($usuario)) {
     
         echo "<script>
-                alert('Usuário Deletado com Sucesso!!');
-                location.href = '../views/index.html';
+                alert('Deletado com Sucesso!!');
+                location.href = '../index.html';
             </script>";
         }
     }
@@ -85,6 +84,7 @@ if(isset($_POST['cadastrar'])){
   } else {
       echo "<script>
           alert('Acesso inválido! login ou senha incorretos!');
+          location.href = '../index.html';
       </script>";
   }
 

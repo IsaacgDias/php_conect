@@ -9,16 +9,58 @@
 <body>
     <div class="container">
         <h1>Cadastrar-se</h1>
-        <form action="../controller/UserController.php" method="post" name="cad" class="formConect">
-            <input type="text" id="nome" name="nome" placeholder="Nome">
-            <input type="text" id="telefone" name="telefone" placeholder="Telefone">
-            <input type="text" id="mail" name="mail" placeholder="Email">
-            <input type="password" name="senha" id="senha" placeholder="Password">
-            <input type="password" name="senha1" id="senha1" placeholder="Password novamente">
+        <form action="../controller/UserController.php" method="post" name="cad" class="formConect" onsubmit="return validarSenha()">
+            <input type="text" id="nome" name="nome" placeholder="Nome" required>
+            <input type="text" id="telefone" name="telefone" placeholder="Telefone" required>
+            <input type="text" id="mail" name="mail" placeholder="Email" required>
+            <input type="password" name="senha" id="senha" placeholder="Password" required>
+            <input type="password" name="senha1" id="senha1" placeholder="Password novamente" required>
+
+            <input type="checkbox" id="mostrarSenha" onclick="toggleMostrarSenha()">Mostrar Senha</input>
+            </br></br>
             <button type="submit" id="cadastrar" name="cadastrar" value="cadastrar">Confirmar</button>
-        </br></br>
-        <span><a href="index.html">Possui uma conta?</a></span>
+            </br></br>
+            <span><a href="../index.html">Possui uma conta?</a></span>
+           
         </form>
     </div>
+
+    <script>
+        function validarSenha() {
+            let senha = document.getElementById('senha');
+            let senha1 = document.getElementById('senha1');
+
+            if (senha.value.length < 4 || senha1.value.length < 4) {
+                alert("A senha deve ter pelo menos 4 caracteres!");
+                return false;
+            } else if (senha.value !== senha1.value) {
+                senha1.setCustomValidity("Senhas diferentes!");
+                senha1.reportValidity();
+                return false;
+            } else {
+                senha1.setCustomValidity("");
+                return true;
+            }
+
+            if (senha.type === 'text' || senha1.type === 'text') {
+                senha.type = 'password';
+                senha1.type = 'password';
+            }
+            return true;
+        }
+
+        function toggleMostrarSenha() {
+            var senha = document.getElementById('senha');
+            var senha1 = document.getElementById('senha1');
+
+            if (senha.type === 'password' || senha1.type === 'password') {
+                senha.type = 'text';
+                senha1.type = 'text';
+            } else {
+                senha.type = 'password';
+                senha1.type = 'password';
+            }
+        }
+    </script>
 </body>
 </html>
